@@ -3,7 +3,7 @@ import random
 # Banco de palavras, palavra aleatória escolhida pelo computador e lista de letras ditas pelo jogador
 banco_de_palavras = ['python', 'javascript', 'computador', 'monitor', 'mouse', 'java', 'teclado', 'windows', 'linux',
                      'macbook', 'apple', 'microsoft', 'rede', 'suporte', 'ligar', 'desligar', 'pasta', 'painel',
-                     'erro', 'bug', 'teste', 'qualidade']
+                     'erro', 'bug', 'qualidade']
 palavra_certa = random.choice(banco_de_palavras)
 palavra_certa = palavra_certa.upper()
 letras_jogadas = []

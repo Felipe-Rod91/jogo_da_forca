@@ -1,46 +1,43 @@
 import random
 
-# Banco de palavras, palavra aleatória escolhida pelo computador e lista de letras ditas pelo jogador
-banco_de_palavras = ['python', 'javascript', 'computador', 'monitor', 'mouse', 'java', 'teclado', 'windows', 'linux',
-                     'macbook', 'apple', 'microsoft', 'rede', 'suporte', 'ligar', 'desligar', 'pasta', 'painel',
-                     'erro', 'bug', 'qualidade']
-palavra_certa = random.choice(banco_de_palavras)
-palavra_certa = palavra_certa.upper()
-letras_jogadas = []
-tentativas = 7
-venceu = False
+# Game setup and data base
+data_base = ['python', 'javascript', 'computer', 'monitor', 'mouse', 'java', 'keyboard', 'windows', 'linux',
+            'macbook', 'apple', 'microsoft', 'netword', 'support', 'file', 'error', 'bug']
+hidden_word = random.choice(data_base).upper()
+letters = []
+chances = 7
+win = False
 
-# Palavra escondida com as letras que já foram acertadas
+# Hidden word
 while True:
-    for letra in palavra_certa:
-        if letra in letras_jogadas:
-            print(letra, end=' ')
+    for l in hidden_word:
+        if l in letters:
+            print(l, end=' ')
         else:
             print('_', end=' ')
     print()
 
-    # Letras que o usuário tenta acertar
+    # Guessing system
     while True:
-        letra_escolhida = str(input('Digite uma letra: ').upper())
-        if letra_escolhida in letras_jogadas:
-            print('Esta letra já foi jogada. Tente outra.')
+        letter = str(input('Type any letter: ').upper())
+        if letter in letters:
+            print('You already tried this letter. Try another one.')
         else:
-            letras_jogadas.append(letra_escolhida)
-            if letra_escolhida not in palavra_certa:
-                tentativas -= 1
-                if tentativas > 0:
-                    print(f'ERROU! Você tem mais {tentativas} tentativas.')
-            venceu = True
-            for letra in palavra_certa:
-                if letra not in letras_jogadas:
-                    venceu = False
+            letters.append(letter)
+            if letter not in hidden_word:
+                chances -= 1
+                if chances > 0:
+                    print(f'WRONG! You got {chances} more chances.')
+            win = True
+            for l in hidden_word:
+                if l not in letters:
+                    win = False
         break
 
-    # Final com mensagens se o jogador ganhou ou perdeu
-    if tentativas == 0:
-        print(f'Que pena, você perdeu! A palavra era {palavra_certa}.')
+    # Win or lose messages
+    if chances == 0:
+        print(f'SORRY, YOU LOST! THE HIDDEN WORD WAS "{hidden_word}".')
         break
-    if venceu:
-        print(f'Parabéns, você ganhou! A palavra certa era {palavra_certa}.')
+    if win:
+        print(f'CONGRATULATIONS! THE HIDDEN WORD WAS "{hidden_word}".')
         break
-
